@@ -30,7 +30,7 @@ def train(train_model, eval_model=None, debug_port=None):
   # initializing session parameters
   sess_config = tf.ConfigProto(allow_soft_placement=True)
   # pylint: disable=no-member
-  sess_config.gpu_options.allow_growth = True
+  sess_config.gpu_options.allow_growth = False
   if hvd is not None:
     # pylint: disable=no-member
     sess_config.gpu_options.visible_device_list = str(hvd.local_rank())
@@ -163,6 +163,7 @@ def train(train_model, eval_model=None, debug_port=None):
     deco_print("Finished training")
     if step > bench_start:
       avg_time = 1.0 * total_time / num_bench_updates
+      deco_print("Total time: {:.3f}s".format(total_time))
       deco_print("Avg time per step: {:.3f}s".format(avg_time))
       if len(fetches) > 1:
         avg_objects = 1.0 * total_objects / total_time

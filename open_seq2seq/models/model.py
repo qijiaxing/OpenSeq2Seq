@@ -529,7 +529,7 @@ class Model:
           return_elements=[x+':0' for x in output_node_names],
           name='')
       return loss, self._outputs[gpu_id]
-    else:
+    else:  # NO TensorRT
       return self._build_forward_pass_graph(input_tensors, gpu_id)
 
   @abc.abstractmethod

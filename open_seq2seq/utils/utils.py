@@ -217,6 +217,7 @@ def iterate_data(model, sess, compute_loss, mode, verbose, num_steps=None):
 
   if verbose:
     if step > bench_start:
+      deco_print("Total time: {:.3}s".format(total_time))
       deco_print(
           "Avg time per step{}: {:.3}s".format(
               ending, 1.0 * total_time / (step - bench_start)
